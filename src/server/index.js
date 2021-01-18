@@ -4,7 +4,9 @@ const path = require('path')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-app.use(express.static('./src/'));
+// Set up the Static files and they routes
+app.use('/client',express.static(path.join(__dirname,'..','client')));
+app.use('/src/Assets',express.static(path.join(__dirname,'..','Assets')))
 app.use(express.static(path.join(__dirname,'..','..','public')));
 
 app.get('/', (req,res) => {

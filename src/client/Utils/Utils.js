@@ -1,4 +1,9 @@
 export default class Utils {
+    
+    static SIZE_TILE = 108;
+    
+    static CENTER_PIECE = this.SIZE_TILE/2;
+
     static MOVEMENTS = {
         'PAWN' : [{x:0, y:1}],
         'BISHOP': [{x:1, y:1}, {x:-1, y:1}, {x:1, y: -1}, {x:-1, y:-1}],

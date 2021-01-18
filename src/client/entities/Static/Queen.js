@@ -1,5 +1,5 @@
 import Piece from "./Piece.js";
-import Utils from "../../Utils/Movement.js"
+import Utils from "../../Utils/Utils.js"
 
 export default class Queen extends Piece{
     constructor(color){

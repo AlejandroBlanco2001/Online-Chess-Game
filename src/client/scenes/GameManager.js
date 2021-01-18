@@ -16,7 +16,7 @@ export default class GameManager{
             }
             board.push(temp)
         }
-        return board
+        return board;
     }
 
     setUpPieces(){

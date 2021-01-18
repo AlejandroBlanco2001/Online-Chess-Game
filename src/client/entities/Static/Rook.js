@@ -1,5 +1,5 @@
 import Piece from "./Piece.js";
-import Utils from "../../Utils/Movement.js"
+import Utils from "../../Utils/Utils.js"
 
 export default class Rook extends Piece{
     constructor(color){

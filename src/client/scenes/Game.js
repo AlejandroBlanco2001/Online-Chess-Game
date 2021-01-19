@@ -11,6 +11,20 @@ export default class Game extends Phaser.Scene{
         this.turn = 0;
     }
 
+    setUpPiecesOrder(piece,adder,heigthTurn, heigthTurn2){
+        let turn = this.turn == 0 ? 'W' : 'B'
+        let turn2 = turn == 'W' ? 'B' : 'W'
+        if(piece != 'king' && piece != 'queen'){
+            this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE * heigthTurn2, piece + turn);
+            this.add.sprite(Utils.CENTER_PIECE * (15-adder+1),Utils.CENTER_PIECE * heigthTurn2, piece + turn);
+            this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE * heigthTurn,piece + turn2);
+            this.add.sprite(Utils.CENTER_PIECE * (15-adder+1),Utils.CENTER_PIECE * heigthTurn,piece + turn2); 
+        }else{
+            this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE * heigthTurn2, piece + turn);
+            this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE * heigthTurn,piece + turn2);
+        }
+    }
+
     init(){
 
     }
@@ -41,24 +55,17 @@ export default class Game extends Phaser.Scene{
         this.terrain = board.addTilesetImage('tileset','tileset')
         let layer = board.createLayer('topLayer', [this.terrain], 0,0);
         var adder = 1
-        for(let i = 0; i < 8; i++){0
-            if(i < 4){ 
-                if(this.turn == 0){
-                    this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE * 3,'pawnB');
-                    this.add.sprite(Utils.CENTER_PIECE * (15-adder+1),Utils.CENTER_PIECE * 3,'pawnB');
-                    this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE*13,'pawnW');
-                    this.add.sprite(Utils.CENTER_PIECE * (15-adder+1),Utils.CENTER_PIECE*13,'pawnW');
-                }else{
-                    this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE * 3,'pawnW');
-                    this.add.sprite(Utils.CENTER_PIECE * (15-adder+1),Utils.CENTER_PIECE * 3,'pawnW');
-                    this.add.sprite(Utils.CENTER_PIECE * adder,Utils.CENTER_PIECE*13,'pawnB');
-                    this.add.sprite(Utils.CENTER_PIECE * (15-adder+1),Utils.CENTER_PIECE*13,'pawnB');
-                }
-                adder += 2
-            }else{
-
-            }
+        let pieces = ['rook','horse','bishop','queen','king']
+        for(let i = 0; i < 4; i++){0
+            this.setUpPiecesOrder('pawn',adder,3,13)
+            adder += 2
         }
+        adder = 1;
+        pieces.forEach(piece => {
+            this.setUpPiecesOrder(piece, adder,1,15);
+            adder += 2;
+        });
+
     }
 
     update(){

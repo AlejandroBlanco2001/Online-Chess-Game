@@ -17,7 +17,9 @@ export default class Game extends Phaser.Scene{
         this.turn = 0;
     }
 
-
+    /**
+     * Method that create the board for the purpose of logic
+     */
     placePieces(){
         let pos = 7;
         let color = 'W';
@@ -29,27 +31,33 @@ export default class Game extends Phaser.Scene{
                 heightP = 3;
                 heigtR = 1;
                 pos = 2;
-            }
-                this.board.getSquares()[pos][0] = new Pawn(Utils.CENTER_PIECE * 1,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
-                this.board.getSquares()[pos][1] = new Pawn(Utils.CENTER_PIECE * 3,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i)
-                this.board.getSquares()[pos][2] = new Pawn(Utils.CENTER_PIECE * 5,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
-                this.board.getSquares()[pos][3] = new Pawn(Utils.CENTER_PIECE * 7,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
-                this.board.getSquares()[pos][4] = new Pawn(Utils.CENTER_PIECE * 9,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
-                this.board.getSquares()[pos][5] = new Pawn(Utils.CENTER_PIECE * 11,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
-                this.board.getSquares()[pos][6] = new Pawn(Utils.CENTER_PIECE * 13,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
-                this.board.getSquares()[pos][7] = new Pawn(Utils.CENTER_PIECE * 15,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i);
+            }   
+                // Pawn positions
+                this.board.getSquares()[pos][0].setPiece(new Pawn(Utils.CENTER_PIECE * 1,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
+                this.board.getSquares()[pos][1].setPiece(new Pawn(Utils.CENTER_PIECE * 3,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i))
+                this.board.getSquares()[pos][2].setPiece(new Pawn(Utils.CENTER_PIECE * 5,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
+                this.board.getSquares()[pos][3].setPiece(new Pawn(Utils.CENTER_PIECE * 7,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
+                this.board.getSquares()[pos][4].setPiece(new Pawn(Utils.CENTER_PIECE * 9,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
+                this.board.getSquares()[pos][5].setPiece(new Pawn(Utils.CENTER_PIECE * 11,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
+                this.board.getSquares()[pos][6].setPiece(new Pawn(Utils.CENTER_PIECE * 13,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
+                this.board.getSquares()[pos][7].setPiece(new Pawn(Utils.CENTER_PIECE * 15,Utils.CENTER_PIECE * heightP, this,'pawn' + color,i));
                 
                 pos = (pos == 2 && color == 'B') ? 0 : pos;
 
-                this.board.getSquares()[pos+1][0] = new Rook(Utils.CENTER_PIECE * 1, Utils.CENTER_PIECE * heigtR, this, 'rook' + color, i);
-                this.board.getSquares()[pos+1][1] = new Rook(Utils.CENTER_PIECE * 15, Utils.CENTER_PIECE * heigtR, this, 'rook' + color, i);
-                this.board.getSquares()[pos+1][2] = new Horse(Utils.CENTER_PIECE * 3, Utils.CENTER_PIECE * heigtR, this, 'horse' + color, i);
-                this.board.getSquares()[pos+1][3] = new Horse(Utils.CENTER_PIECE * 13, Utils.CENTER_PIECE * heigtR, this, 'horse' + color, i);
-                this.board.getSquares()[pos+1][4] = new Bishop(Utils.CENTER_PIECE * 5, Utils.CENTER_PIECE * heigtR, this, 'bishop' + color, i);
-                this.board.getSquares()[pos+1][5] = new Bishop(Utils.CENTER_PIECE * 11, Utils.CENTER_PIECE * heigtR, this, 'bishop' + color, i);;
-                this.board.getSquares()[pos+1][6] = new Queen(Utils.CENTER_PIECE * 7, Utils.CENTER_PIECE * heigtR, this, 'queen' + color, i);
-                this.board.getSquares()[pos+1][7] = new King(Utils.CENTER_PIECE * 9, Utils.CENTER_PIECE * heigtR, this, 'king' + color, i);;
+                // Other pieces positions
+                this.board.getSquares()[pos+1][0].setPiece(new Rook(Utils.CENTER_PIECE * 1, Utils.CENTER_PIECE * heigtR, this, 'rook' + color,i));
+                this.board.getSquares()[pos+1][1].setPiece(new Rook(Utils.CENTER_PIECE * 15, Utils.CENTER_PIECE * heigtR, this, 'rook' + color,i));
+                this.board.getSquares()[pos+1][2].setPiece(new Horse(Utils.CENTER_PIECE * 3, Utils.CENTER_PIECE * heigtR, this, 'horse' + color,i));
+                this.board.getSquares()[pos+1][3].setPiece(new Horse(Utils.CENTER_PIECE * 13, Utils.CENTER_PIECE * heigtR, this, 'horse' + color,i));
+                this.board.getSquares()[pos+1][4].setPiece(new Bishop(Utils.CENTER_PIECE * 5, Utils.CENTER_PIECE * heigtR, this, 'bishop' + color,i));
+                this.board.getSquares()[pos+1][5].setPiece(new Bishop(Utils.CENTER_PIECE * 11, Utils.CENTER_PIECE * heigtR, this, 'bishop' + color,i));
+                this.board.getSquares()[pos+1][6].setPiece(new Queen(Utils.CENTER_PIECE * 7, Utils.CENTER_PIECE * heigtR, this, 'queen' + color, i));
+                this.board.getSquares()[pos+1][7].setPiece(new King(Utils.CENTER_PIECE * 9, Utils.CENTER_PIECE * heigtR, this, 'king' + color, i));
         }
+    }
+
+    getBoard(){
+        return this.board;
     }
 
     init(){
@@ -61,7 +69,7 @@ export default class Game extends Phaser.Scene{
         this.load.image('tileset', 'src/Assets/backgroundTiles/tileset.png');
         this.load.tilemapTiledJSON('board','src/Assets/backgroundTiles/board.json')
         
-        // Loading Pieces images - Black White
+        // Loading Pieces images - Black and White
         this.load.image('pawnB','src/Assets/Pieces/b_pawn.png');
         this.load.image('bishopB','src/Assets/Pieces/b_bishop.png');
         this.load.image('horseB','src/Assets/Pieces/b_knight.png');
@@ -84,8 +92,11 @@ export default class Game extends Phaser.Scene{
         
         this.placePieces();
 
-        
+        // Event of dragging a picee
         this.input.on('drag', (pointer, gameO, dragX, dragY) => {
+            if(gameO instanceof Piece){
+                this.gsm.checkPosisbleMovements(gameO);
+            }
             gameO.x = dragX;
             gameO.y = dragY;
         })

@@ -9,7 +9,7 @@ export default class Pawn extends Piece{
     }
 
     move(){
-        console.log('PAWN MOVEMENT')
+    
     }
 
 }

@@ -7,13 +7,19 @@ export default class Square{
     }
 
     setPiece(piece){
-        if(this.piece != null){
+        if(piece != null){
             this.piece = piece;
-        }
-        throw new Error('Null paramater')
+            piece.setSquare(this);
+        }else{
+            throw new Error('Null paramater')
+        }   
     }
 
     isOcuppied(){
         return this.piece !== null ? true : false
+    }
+
+    getPosition(){
+        return {row: this.row, column: this.column};
     }
 }

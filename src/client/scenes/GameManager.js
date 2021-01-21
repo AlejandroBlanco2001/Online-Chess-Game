@@ -4,20 +4,9 @@ import Queen from "../entities/Static/Queen.js";
 import King from "../entities/Static/King.js";
 import Horse from "../entities/Static/Horse.js";
 import Rook from "../entities/Static/Rook.js";
+import Board from "../entities/Enviorement/Board.js";
 
 export default class GameManager{
-
-    setUpBoard(){
-        let board = [[]]
-        for(let row = 0; row < 8; row++){
-            let temp = []
-            for(let col = 0; col < 8; col++){
-                temp.push(-1)
-            }
-            board.push(temp)
-        }
-        return board;
-    }
 
     setUpPieces(){
         let pieces = []
@@ -28,15 +17,16 @@ export default class GameManager{
             let rook = [0,0].map(item => {return new Rook(i)})
             let king = new King(i);
             let queen = new Queen(i);
-            pieces.push[pawns,bishops,horse,rook,king,queen];
+            pieces.push(...pawns,...rook,...horse,...bishops,king,queen);
         }
-        console.log([].concat(...pieces));
-        return [].concat(...pieces)
+        return pieces;
     }
 
-    constructor(game){
+
+
+    constructor(game,){
         this.game = game
-        this.board = [];
+        this.board = new Board();
         this.pieces = [];
     }
 
@@ -44,7 +34,6 @@ export default class GameManager{
     }
 
     preload(){
-        this.board = this.setUpBoard();
         this.pieces = this.setUpPieces();
     }
 
